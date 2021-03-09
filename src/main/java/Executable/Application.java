@@ -3,29 +3,51 @@
  */
 package Executable;
 
-import javax.persistence.EntityManager;
+
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
+import Services.GestionClients.ListeClients;
+import Services.GestionVehicules.ListeVehicules;
+import composants.AbstractApplication;
+
+
 
 
 /**
  * @author manon
  *
  */
-public class Application {
+public class Application extends AbstractApplication {
+	
+	/** serialVersionUID */
+	private static final long serialVersionUID = 6755835482616236832L;
 	
 	public static EntityManagerFactory emf = Persistence.createEntityManagerFactory("Agence-VIP");
 	
 	/**
+	 * Constructor
+	 * @param title
+	 */
+	public Application(String title) {
+		super(title);
+	}
+	
+	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public void main() {
 		
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction transaction = em.getTransaction();
-		transaction.begin();
-		transaction.commit();
+		addMenu(1, "Gestion des véhicules");
+		addMenu(2, "Gestion des clients");
+		addMenu(3, "Gestion des réservations");
+		
+		addMenuOption(2, "Liste des clients", new ListeClients());
+		addMenuOption(2, "Liste des Vehicules", new ListeVehicules());
+
+
+
+
 
 	}
 

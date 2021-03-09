@@ -3,6 +3,7 @@
  */
 package Entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ public class Clients {
 	@Column(name = "Prenom", nullable = false)
 	private String prenom;
 	
-	@Column(name = "Telephone", nullable = false)
+	@Column(name = "Telephone", nullable = false, length = 10)
 	private String telephone;
 	
 	@Column(name = "Email", nullable = false, unique = true)
@@ -67,17 +68,16 @@ public class Clients {
 	 * @param permis
 	 * @param reservations
 	 */
-	public Clients(Integer id, String nom, String prenom, String telephone, String email, Adresses adresse,
-			Permis permis, List<Reservations> reservations) {
+	public Clients(String nom, String prenom, String telephone, String email, Adresses adresse,
+			Permis permis) {
 		super();
-		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.telephone = telephone;
 		this.email = email;
 		this.adresse = adresse;
 		this.permis = permis;
-		this.reservations = reservations;
+		this.reservations = new ArrayList<>();
 	}
 	
 	////////// GETTERS & SETTERS ///////////

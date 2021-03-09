@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import Enumerations.StatusVehicules;
+
 /**
  * @author manon
  *
@@ -38,13 +40,20 @@ public class Voitures extends Vehicules {
 	 * @param nbPlace
 	 * @param typeVehicule
 	 */
-	public Voitures(Integer id, TypeVehicules type, int nbPlace, TypeVehicules typeVehicule) {
+	public Voitures(Integer id, int nbPlace, TypeVehicules typeVehicule) {
 		super();
 		this.nbPlace = nbPlace;
 		this.typeVehicule = typeVehicule;
 	}
 	
 	////////// GETTERS & SETTERS ///////////
+
+	public Voitures(String marque, String modele, String immatriculation, double kilometrage,
+			StatusVehicules statusVehicule, String commentaire, int nbPlace, TypeVehicules typeVehicule) {
+		super(marque, modele, immatriculation, kilometrage, statusVehicule, commentaire);
+		this.nbPlace = nbPlace;
+		this.typeVehicule = typeVehicule;
+	}
 
 	/**
 	 * Getter
@@ -84,6 +93,11 @@ public class Voitures extends Vehicules {
 	@Override
 	public String toString() {
 		return "Voitures [nbPlace=" + nbPlace + ", typeVehicule=" + typeVehicule + "]";
+	}
+
+	@Override
+	public double getVolume() {
+		return 0;
 	}
 
 }

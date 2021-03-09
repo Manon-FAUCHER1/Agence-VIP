@@ -6,6 +6,7 @@ package DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import Entities.Clients;
@@ -17,34 +18,45 @@ import Executable.Application;
  */
 public class ReservationsDAO {
 	
-	private static EntityManager em = Application.emf.createEntityManager();
+	private static EntityManager em;
 	
-	public static List<Reservations> slectCurrent() {
-		
+	public ReservationsDAO(EntityManager em) {
+		super();
+		this.em = em;
+	}
+	
+	/**
+	 * Retourne la liste des Reservations en cours
+	 * @return Liste<Reservation>
+	 */
+	public List<Reservations> slectCurrent() {
 		TypedQuery<Reservations> query = em.createQuery(
 				"SELECT reservations FROM Reservations reservations WHERE reservations.date_fin IS NULL",
 				Reservations.class);
-		List<Reservations> reservations = query.getResultList();
-		
-		return reservations;
-		
+		return query.getResultList();
 	}
 	
-	public static List<Reservations> selectFinish() {
-		
+	/**
+	 * Retourne la liste des Reservations fini
+	 * @return Liste<Reservation>
+	 */
+	public List<Reservations> selectFinish() {		
 		TypedQuery<Reservations> query = em.createQuery(
 				"SELECT reservations FROM Reservations reservations WHERE reservations.date_fin < DATE( NOW() )",
 				Reservations.class);
-		List<Reservations> reservations = query.getResultList();
-		
-		return reservations;
+		 return query.getResultList();		 
 	}
 	
-	public static void edit() {
+	public void insert(Reservations reservation) {
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
 		
+		em.persist(reservation);
+		
+		transaction.commit();
 	}
 	
-	public static void delete() {
+	public void close() {
 		
 	}
 

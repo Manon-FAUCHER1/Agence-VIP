@@ -6,140 +6,141 @@ package DAO;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import Entities.Camions;
-import Entities.Societe;
-import Entities.TypeVehicules;
+import Entities.Clients;
 import Entities.Vehicules;
 import Entities.Voitures;
-import Enumerations.StatusVehicules;
-import Executable.Application;
-import Utils.VerifUtils;
+import composants.db.SqlUtils;
+
 
 /**
  * @author manon
  *
  */
 public class VehiculesDAO {
-	private static EntityManager em = Application.emf.createEntityManager();
-
+	
+	/** entity manager */
+	private EntityManager em;
+	
 	/**
-	 * @return List<Vehicules>
+	 * Constructor
+	 * @param em entity manager
 	 */
-	public static List<Vehicules> selectAll() {
-
-		TypedQuery<Vehicules> query = em.createQuery("SELECT vehicules FROM Vehicules vehicules", Vehicules.class);
-		List<Vehicules> vehicules = query.getResultList();
-
-		return vehicules;
+	public VehiculesDAO(EntityManager em) {
+		super();
+		this.em = em;
+	}
+	
+	/** Retourne un vehicule en fonction de son id
+	 * @param id identifiant
+	 * @return {@link Vehicules}
+	 */
+	public Vehicules getVehicule(int id){
+		return em.find(Vehicules.class, id);
 	}
 
-	public static List<Vehicules> selectVehiculeReservNull() {
+	/**
+	 * Return la liste de tous les Vehicules
+	 * @return List<Vehicules>
+	 */
+	public List<Vehicules> selectAll() {
+		TypedQuery<Vehicules> query = em.createQuery("SELECT vehicules FROM Vehicules vehicules", Vehicules.class);
+		return query.getResultList();
+	}
+
+	/**
+	 * Return la liste de tous les Vehicules qui n'on aucune reservation
+	 * @return List<Vehicules>
+	 */
+	public List<Vehicules> selectVehiculeReservNull() {
 
 		TypedQuery<Vehicules> query = em.createQuery(
 				"SELECT vehicules FROM Vehicules vehicules JOIN vehicules.reservations reservations WHERE reservations.",
 				Vehicules.class);
-		List<Vehicules> vehicules = query.getResultList();
-
-		return vehicules;
-	}
-
-	public static void insertVoiture(String marque, String modele, TypeVehicules typeVehicule, String immatriculation,
-			String nbPlace, String kilometrage, String commentaire) {
-
-		Voitures voiture = new Voitures();
-
-		// Verification des champs obligatoire
-		marque = VerifUtils.verifString(marque);
-		modele = VerifUtils.verifString(modele);
-		immatriculation = VerifUtils.verifString(immatriculation);
-		StatusVehicules statusVehicule = StatusVehicules.find("DISPONIBLE");
-		int nbPlace1 = VerifUtils.parseInteger(nbPlace);
-		double kilometrage1 = VerifUtils.parseDouble(kilometrage);
-
-		voiture.setMarque(marque);
-		voiture.setModele(modele);
-		voiture.setTypeVehicule(typeVehicule);
-		voiture.setImmatriculation(immatriculation);
-		voiture.setStatusVehicule(statusVehicule);
-		voiture.setKilometrage(kilometrage1);
-		voiture.setNbPlace(nbPlace1);
-		voiture.setCommentaire(commentaire);
-
-		TypedQuery<Voitures> query = em.createQuery(
-				"SELECT voitures FROM Voitures voitures WHERE voitures.immatriculation = ?", Voitures.class);
-		query.setParameter(1, immatriculation);
-		List<Voitures> voitures = query.getResultList();
-
-		if (voitures.isEmpty()) {
-			em.persist(voitures);
-		} else {
-			voiture = voitures.get(0);
-		}
+		return query.getResultList();
 
 	}
 
-	public static void insertCamion(String marque, String modele, TypeVehicules typeVehicule, String immatriculation,
-			String volume, String kilometrage, String commentaire) {
-
-		Camions camion = new Camions();
-
-		// Verification des champs obligatoire
-		marque = VerifUtils.verifString(marque);
-		modele = VerifUtils.verifString(modele);
-		immatriculation = VerifUtils.verifString(immatriculation);
-		StatusVehicules statusVehicule = StatusVehicules.find("DISPONIBLE");
-		double volume1 = VerifUtils.parseDouble(volume);
-		double kilometrage1 = VerifUtils.parseDouble(kilometrage);
-
-		camion.setMarque(marque);
-		camion.setModele(modele);
-		camion.setTypeVehicule(typeVehicule);
-		camion.setImmatriculation(immatriculation);
-		camion.setVolume(volume1);
-		camion.setStatusVehicule(statusVehicule);
-		camion.setKilometrage(kilometrage1);
-		camion.setCommentaire(commentaire);
-
-		TypedQuery<Camions> query = em
-				.createQuery("SELECT camions FROM Camions camions WHERE camions.immatriculation = ?", Camions.class);
-		query.setParameter(1, immatriculation);
-		List<Camions> camions = query.getResultList();
-
-		if (camions.isEmpty()) {
-			em.persist(camions);
-		} else {
-			camion = camions.get(0);
-		}
+	/**
+	 * Insererer une voiture
+	 * @param voiture : nouvelle voiture
+	 */
+	public  void insertVoiture(Voitures voiture) {
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		
+		em.persist(voiture);
+		
+		transaction.commit();
+	}
+	
+	/**
+	 * Insererer un camion
+	 * @param camion : nouveau camion
+	 */
+	public  void insertCamion(Camions camion) {
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		
+		em.persist(camion);
+		
+		transaction.commit();
 	}
 
-	public static void edit(Vehicules vehiculeUpdate) {
-
-		// Modification de l'immatriculation seulement si le vehicule 
-		List<Vehicules> Listvehicules = VehiculesDAO.selectVehiculeReservNull();
-		for (Vehicules vehicule : Listvehicules) {
-			if (vehiculeUpdate == vehicule) {
-
-				TypedQuery<Vehicules> query = em.createQuery(
-						"UPDATE Vehicules vehicule SET vehicule.immatriculation = :newImmatriculation WHERE vehicule.id = ?1",
-						Vehicules.class);
-				query.setParameter("newImmatriculation", vehicule.getImmatriculation());
-				query.setParameter(1, vehicule.getId());
-
-			}
+	/** 
+	 * Modifie un vehicule
+	 * @param vehicule : vehicule avec les nouvelles données
+	 */
+	public  void edit(Vehicules vehicule) {
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		
+		Vehicules vehiculeDB = getVehicule(vehicule.getId());
+		if (vehiculeDB!=null) {
+			vehiculeDB.setMarque(vehicule.getMarque());
+			vehiculeDB.setModele(vehicule.getModele());
+			vehiculeDB.setImmatriculation(vehicule.getImmatriculation());
+			vehiculeDB.setKilometrage(vehicule.getKilometrage());
+			vehiculeDB.setCommentaire(vehicule.getCommentaire());
 		}
 		
-		
-
+		transaction.commit();
 	}
 
-	public static void delete(Vehicules vehicule) {
+	/** Suppression d'un vehicule dont l'id est passé en paramètre
+	 * @param id : identifiant du vehicule
+	 */
+	public  void delete(int id) {
 
-		TypedQuery<Vehicules> query = em
-				.createQuery("DELETE FROM Vehicules vehicule WHERE vehicule.immatriculation = ?1", Vehicules.class);
-		query.setParameter(1, vehicule.getImmatriculation());
-
+		EntityTransaction transaction = em.getTransaction();
+		transaction.begin();
+		
+		List<Vehicules> liVehicules = selectVehiculeReservNull();
+		Vehicules vehiculeDB = getVehicule(id);
+		
+		for (Vehicules vehicules : liVehicules) {
+			if (vehicules == vehiculeDB && vehiculeDB!=null) {
+				em.remove(vehiculeDB);
+			} else {
+				System.err.println("Le vehicule a des reservation il ne peut pas etre supprimé !");
+			}	
+		}
+		
+		transaction.commit();
+	}
+	
+	/**
+	 * Lance un script d'initialisation si la table des Vehicule est vide
+	 */
+	public void init() {
+		TypedQuery<Clients> query = em.createQuery("SELECT clients FROM Clients clients", Clients.class);
+		List<Clients> clients = query.getResultList();
+		if (clients.size()==0) {
+			SqlUtils.executeFile("exemple.sql", em);
+		}
 	}
 
 }

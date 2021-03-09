@@ -3,10 +3,14 @@
  */
 package Entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import Enumerations.StatusVehicules;
 
 /**
  * @author manon
@@ -37,8 +41,15 @@ public class Camions extends Vehicules {
 	 * @param volume
 	 * @param typeVehicule
 	 */
-	public Camions(TypeVehicules type, double volume, TypeVehicules typeVehicule) {
+	public Camions(double volume, TypeVehicules typeVehicule) {
 		super();
+		this.volume = volume;
+		this.typeVehicule = typeVehicule;
+	}
+	
+	public Camions(String marque, String modele, String immatriculation, double kilometrage,
+			StatusVehicules statusVehicule, String commentaire, double volume, TypeVehicules typeVehicule) {
+		super(marque, modele, immatriculation, kilometrage, statusVehicule, commentaire);
 		this.volume = volume;
 		this.typeVehicule = typeVehicule;
 	}
@@ -84,6 +95,12 @@ public class Camions extends Vehicules {
 	public String toString() {
 		return "Camions [volume=" + volume + ", typeVehicule=" + typeVehicule + "]";
 	}
+
+	@Override
+	public int getNbPlace() {
+		return 3;
+	}
+
 	
 	
 	

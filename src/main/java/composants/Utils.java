@@ -1,9 +1,16 @@
-package Utils;
+package composants;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
+
+import composants.error.ErrorManager;
 
 
-public class VerifUtils {
+public class Utils {
 
 	/**
 	 * @param String valeur
@@ -32,6 +39,28 @@ public class VerifUtils {
 			return Integer.parseInt(valeur);
 		}
 	}
+	
+	/**
+	 * @param valeur
+	 * @return
+	 */
+	public static Date parseDate(String valeur) {
+		SimpleDateFormat spDate = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			return spDate.parse(valeur);
+		} catch (ParseException e) {
+			ErrorManager.manage("Erreur de parsing", e);
+		}
+		
+		return null;
+	}
+	
+	public static String parseDateString(Date date) {
+		String dateToStr = DateFormatUtils.format(date, "dd/MM/yyyy");
+		return dateToStr;
+		
+	}
 
 	/**
 	 * @param String valeur
@@ -46,21 +75,7 @@ public class VerifUtils {
 		}
 	}
 	
-	public static String verifTelephone(String tel) {
-		
-		
-		
-		switch (tel) {
-		case value:
-			
-			break;
 
-		default:
-			break;
-		}
-		
-	}
-	
 
 
 }

@@ -12,12 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import composants.ui.Selectable;
+
 /**
  * @author manon
  *
  */
 @Entity
-public class TypeVehicules {
+public class TypeVehicules implements Selectable {
 	
 	@Id
 	@Column(name = "Id", nullable = false)

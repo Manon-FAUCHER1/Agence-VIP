@@ -17,9 +17,18 @@ import Executable.Application;
  */
 public class TypeVehiculeDAO {
 	
-	private static EntityManager em = Application.emf.createEntityManager();
+	private EntityManager em;
 	
-	public static List<TypeVehicules> selectAll() {
+	/**
+	 * Constructor
+	 * @param em entity manager
+	 */
+	public TypeVehiculeDAO(EntityManager em) {
+		super();
+		this.em = em;
+	}
+	
+	public List<TypeVehicules> selectAll() {
 		
 		TypedQuery<TypeVehicules> query = em.createQuery(
 				"SELECT typeVehicules FROM TypeVehicules typeVehicules",
@@ -29,11 +38,11 @@ public class TypeVehiculeDAO {
 		return typeVehicules;
 	}
 
-	public static void insert() {
+	public void insert() {
 		
 	}
 
-	public static void editType() {
+	public void editType() {
 	}
 
 }

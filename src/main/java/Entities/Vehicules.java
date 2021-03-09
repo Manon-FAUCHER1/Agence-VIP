@@ -26,7 +26,7 @@ import Enumerations.StatusVehicules;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Vehicules {
+public abstract class Vehicules {
 	
 	@Id
 	@Column(name = "Id", nullable = false)
@@ -83,11 +83,10 @@ public class Vehicules {
 	 * @param maintenances
 	 * @param societe
 	 */
-	public Vehicules(Integer id, String marque, String modele, String immatriculation, double kilometrage,
-			StatusVehicules statusVehicule, String commentaire, List<Reservations> reservations,
-			List<Maintenances> maintenances, Societe societe) {
+	public Vehicules(String marque, String modele, String immatriculation, double kilometrage,
+			StatusVehicules statusVehicule, List<Reservations> reservations,
+			List<Maintenances> maintenances, Societe societe, String commentaire) {
 		super();
-		this.id = id;
 		this.marque = marque;
 		this.modele = modele;
 		this.immatriculation = immatriculation;
@@ -99,6 +98,19 @@ public class Vehicules {
 		this.societe = societe;
 	}
 	
+	
+	
+	public Vehicules(String marque, String modele, String immatriculation, double kilometrage,
+			StatusVehicules statusVehicule, String commentaire) {
+		super();
+		this.marque = marque;
+		this.modele = modele;
+		this.immatriculation = immatriculation;
+		this.kilometrage = kilometrage;
+		this.statusVehicule = statusVehicule;
+		this.commentaire = commentaire;
+	}
+
 	////////// GETTERS & SETTERS ///////////
 
 	/**
@@ -273,6 +285,8 @@ public class Vehicules {
 				+ ", societe=" + societe + "]";
 	}
 	
+	public abstract double getVolume();
+	public abstract int getNbPlace();
 	
 
 	
