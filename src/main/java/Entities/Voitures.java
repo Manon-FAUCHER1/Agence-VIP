@@ -88,6 +88,14 @@ public class Voitures extends Vehicules {
 	}
 
 	/**
+	 * Getter
+	 * @return volume
+	 */
+	public double getVolume() {
+		return 0;
+	}
+	
+	/**
 	 * ToString
 	 */
 	@Override
@@ -95,9 +103,7 @@ public class Voitures extends Vehicules {
 		return "Voitures [nbPlace=" + nbPlace + ", typeVehicule=" + typeVehicule + "]";
 	}
 
-	@Override
-	public double getVolume() {
-		return 0;
-	}
+
+
 
 }

@@ -173,9 +173,10 @@ public class TypeVehicules implements Selectable {
 	 */
 	@Override
 	public String toString() {
-		return "TypeVehicules [id=" + id + ", nom=" + nom + ", tarifJour=" + tarifJour + ", caution=" + caution
-				+ ", voitures=" + voitures + ", Camions=" + camions + "]";
+		return nom;
 	}
+	
+	
 	
 	
 	

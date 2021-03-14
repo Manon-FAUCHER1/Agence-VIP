@@ -287,7 +287,8 @@ public abstract class Vehicules {
 	
 	public abstract double getVolume();
 	public abstract int getNbPlace();
-	
+	public abstract TypeVehicules getTypeVehicule();
+
 
 	
 }

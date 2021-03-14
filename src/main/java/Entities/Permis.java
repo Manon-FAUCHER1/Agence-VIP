@@ -102,9 +102,9 @@ public class Permis {
 	 */
 	@Override
 	public String toString() {
-		return "Permis " + type 
-				+ "\nNumero " + numero 
-				+ "\nObtenue le " + dateObtention;
+		return "Type " + type 
+				+ " Numero " + numero 
+				+ ", Obtenue le " + dateObtention;
 	}
 	
 	

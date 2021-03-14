@@ -27,7 +27,11 @@ public class SqlUtils {
 			String line = null;
 			while( (line = br.readLine()) != null ) {
 			    entityManager.getTransaction().begin();
-			    entityManager.createNativeQuery(line).executeUpdate();
+			    System.out.println(line);
+			    if (line.trim().length() > 0) {
+			    	 entityManager.createNativeQuery(line).executeUpdate();
+				}
+			 
 			    entityManager.getTransaction().commit();
 			}
 			br.close();

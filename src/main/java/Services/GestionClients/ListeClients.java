@@ -47,22 +47,21 @@ public class ListeClients extends MenuService {
 		console.clear();
 		console.println("<h1 class='bg-green'>Liste des clients</h1>");
 		
-		console.print("Ajouter un client",
-				"<a class='btn-blue' href='ajouter()'><img width=25 src='images/plus-blue.png'></a>");
+		console.print("Ajouter un client","<a class='btn-ajout' style='font-size:15px' href='ajouter()'><img width=25 src='images/plus-dark.png'></a>");
 
 		String html = "<table class='table' cellspacing=0>" + "<tr class='bg-green'>" + "<td>&nbsp;</td>"
-				+ "<td>&nbsp;</td>" + "<td>Clients</td>" + "</tr>";
+				+ "<td>&nbsp;</td>" + "<td>Nom</td>" + "<td>Prenom</td>" + "<td>Telephone</td>" + "<td>Email</td>" + "<td>Adresse</td>" + "<td>Permis</td>" + "</tr>";
 
 		for (Clients client : clients) {
 			html += "<tr>" 
-					+ "<td>" + "<a class='btn-blue' href='modifier(" + client.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a>" + "</td>" 
+					+ "<td>" + "<a class='btn-blue' href='modifierClient(" + client.getId() + ")'><img width=25 src='images/pencil-blue-xs.png'></a>" + "</td>" 
 					+ "<td>" + "<a class='btn-red' href='supprimer(" + client.getId() + ")'><img width=25 src='images/trash-red-xs.png'></a>" + "</td>" 
-					+ "<td width='150px'>" + client.getNom() + "</td>" 
-					+ "<td width='150px'>" + client.getPrenom()  + "</td>" 
-					+ "<td width='150px'>" + client.getTelephone() + "</td>"
-					+ "<td width='150px'>" + client.getEmail() + "</td>"
-					+ "<td width='150px'>" + client.getAdresse() + "</td>"
-					+ "<td width='150px'>" + client.getPermis() + "</td>"
+					+ "<td width='140px'>" + client.getNom() + "</td>" 
+					+ "<td width='140px'>" + client.getPrenom()  + "</td>" 
+					+ "<td width='140px'>" + client.getTelephone() + "</td>"
+					+ "<td width='140px'>" + client.getEmail() + "</td>"
+					+ "<td width='400px'>" + client.getAdresse() + "</td>"
+					+ "<td width='400px'>" + client.getPermis() + "</td>"
 					+ "</tr>";
 		}
 		html += "</table>";
@@ -108,13 +107,13 @@ public class ListeClients extends MenuService {
 	}
 	
 	/**
-	 * Méthode appelée lorsque l'utilisateur clique sur une icone de modification
+	 * Méthode appelée lorsque l'utilisateur clique sur l'icone de modification
 	 * dans la table des clients.
 	 * 
 	 * @param id identifiant du client à modifier.
 	 */
-	public void modifier(int id) {
-
+	public void modifierClient(Integer id) {
+		
 		Clients client = clientsDao.getClient(id);
 		Adresses adresses = client.getAdresse();
 		Permis permis = client.getPermis();
@@ -142,34 +141,21 @@ public class ListeClients extends MenuService {
 		boolean valide = console.input("Modification du client " + client.getPrenom() + " " + client.getNom(), form,
 				validator);
 		if (valide) {
-			String nvNom = form.getValue("nom");
-			String nvPrenom = form.getValue("prenom");
-			String nvTelephone = form.getValue("telephone");
-			String nvEmail = form.getValue("email");
+		
+			client.setNom(form.getValue("nom"));
+			client.setPrenom(form.getValue("prenom"));
+			client.setTelephone(form.getValue("telephone"));
+			client.setEmail(form.getValue("email"));
 			
-			int nvNumRue = Utils.parseInteger(form.getValue("numeroAdresse"));
-			String nvNomRue = form.getValue("rue");
-			String nvCodePostal = form.getValue("codePostal");
-			String nvVille = form.getValue("ville");
-			
-			String nvType = form.getValue("TypePermis");
-			String nvNumPermis = form.getValue("numPermis");
-			Date nvDateObtention = Utils.parseDate(form.getValue("dateObtention"));
-			
-			client.setNom(nvNom);
-			client.setPrenom(nvPrenom);
-			client.setTelephone(nvTelephone);
-			client.setEmail(nvEmail);
-			
-			adresses.setNumero(nvNumRue);
-			adresses.setRue(nvNomRue);
-			adresses.setCodePostal(nvCodePostal);
-			adresses.setVille(nvVille);
+			adresses.setNumero(Utils.parseInteger(form.getValue("numeroAdresse")));
+			adresses.setRue(form.getValue("rue"));
+			adresses.setCodePostal(form.getValue("codePostal"));
+			adresses.setVille(form.getValue("ville"));
 			client.setAdresse(adresses);
 			
-			permis.setType(nvType);
-			permis.setNumero(nvNumPermis);
-			permis.setDateObtention(nvDateObtention);
+			permis.setType(form.getValue("TypePermis"));
+			permis.setNumero(form.getValue("numPermis"));
+			permis.setDateObtention(Utils.parseDate(form.getValue("dateObtention")));
 			client.setPermis(permis);			
 
 			clientsDao.edit(client);
@@ -179,14 +165,17 @@ public class ListeClients extends MenuService {
 	}
 	
 	/**
-	 * Méthode appelée lorsque l'utilisateur clique sur une icone de suppression
+	 * Méthode appelée lorsque l'utilisateur clique sur l'icone de suppression
 	 * dans la table des clients
 	 * 
 	 * @param id identifiant du client à supprimer.
 	 */
-	public void supprimer(int id) {
+	public void supprimer(Integer id) {
+		
+		Clients client = clientsDao.getClient(id);
+		
 		boolean result = console.confirm("Suppression de l'item " + id,
-				"Confirmez-vous la suppression de l'item n°" + id);
+				"Confirmez-vous la suppression de " + client.getNom() + " " + client.getPrenom());
 		if (result) {
 			clientsDao.delete(id);
 			traitement();

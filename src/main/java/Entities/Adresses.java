@@ -118,7 +118,7 @@ public class Adresses {
 	 */
 	@Override
 	public String toString() {
-		return "Adresse : " + numero + " " + rue + ", " + codePostal + " " + ville + "\n";
+		return + numero + " " + rue + ", " + codePostal + " " + ville;
 	}
 
 

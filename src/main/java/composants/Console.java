@@ -214,6 +214,7 @@ public class Console {
 			public void actionPerformed(ActionEvent e) {
 
 				synchronized (Launcher.holder) {
+					form.setValidated(true);
 					for (String name : fields.keySet()) {
 						Input input = form.getInput(name);
 						input.setValue(fields.get(name));

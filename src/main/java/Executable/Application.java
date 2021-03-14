@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import Services.GestionClients.ListeClients;
+import Services.GestionTypesVehicules.ListeTypesVehicules;
 import Services.GestionVehicules.ListeVehicules;
 import composants.AbstractApplication;
 
@@ -42,13 +43,11 @@ public class Application extends AbstractApplication {
 		addMenu(2, "Gestion des clients");
 		addMenu(3, "Gestion des réservations");
 		
+		addMenuOption(1, "Liste des Vehicules", new ListeVehicules());
 		addMenuOption(2, "Liste des clients", new ListeClients());
-		addMenuOption(2, "Liste des Vehicules", new ListeVehicules());
-
-
-
-
-
+		addMenuOption(2, "Liste des types de vehicule", new ListeTypesVehicules());
+		
+		
 	}
 
 }

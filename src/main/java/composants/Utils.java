@@ -75,6 +75,19 @@ public class Utils {
 		}
 	}
 	
+	/**
+	 * @param String valeur
+	 * @return
+	 */
+	public static String verifStringAffichage(String valeur) {
+
+		if (valeur == null) {
+			return " ";
+		} else {
+			return valeur;
+		}
+	}
+	
 
 
 

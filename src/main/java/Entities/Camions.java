@@ -87,6 +87,14 @@ public class Camions extends Vehicules {
 	public void setTypeVehicule(TypeVehicules typeVehicule) {
 		this.typeVehicule = typeVehicule;
 	}
+	
+	/**
+	 * Getter
+	 * @return nbPlace
+	 */
+	public int getNbPlace() {
+		return 3;
+	}
 
 	/**
 	 * ToString
@@ -94,11 +102,6 @@ public class Camions extends Vehicules {
 	@Override
 	public String toString() {
 		return "Camions [volume=" + volume + ", typeVehicule=" + typeVehicule + "]";
-	}
-
-	@Override
-	public int getNbPlace() {
-		return 3;
 	}
 
 	

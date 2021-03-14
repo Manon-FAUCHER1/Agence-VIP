@@ -1,4 +1,16 @@
-INSERT INTO Clients (Id, Nom, Prenom, Telephone, Email, Numero_Adresse, Rue, Code_Postal, Ville, Type, Numero_Permis, Date_Obtention) 
-VALUES (1, 'FAUCHER', 'Manon', '0615420267', 'manonf@gmail.com', 27 , 'Boulevard des Tribunes', '44300', 'Nantes', 'B', '231547652', '2018/02/12');
-
-
+INSERT INTO Clients (Id, Nom, Prenom, Telephone, Email, Numero_Adresse, Rue, Code_Postal, Ville, Type, Numero_Permis, Date_Obtention) VALUES (1, 'FAUCHER', 'Manon', '0615420267', 'manonf@gmail.com', 27 , 'Boulevard des Tribunes', '44300', 'Nantes', 'B', '92151600N7492', '2018/02/12');
+INSERT INTO Clients (Id, Nom, Prenom, Telephone, Email, Numero_Adresse, Rue, Code_Postal, Ville, Type, Numero_Permis, Date_Obtention) VALUES (2, 'DUPON', 'Laurent', '0264823671', 'dlaurent@gmail.com', 2 , 'rue de la République', '82700', 'Escatalens', 'A', '911091204209', '2012/08/09');
+INSERT INTO Clients (Id, Nom, Prenom, Telephone, Email, Numero_Adresse, Rue, Code_Postal, Ville, Type, Numero_Permis, Date_Obtention) VALUES (3, 'DO', 'Jone', '0946238423', 'jd@gmail.com', 31 , 'avenue de General Leclerc', '92342', 'BOURG LA REINE', 'C1', '750104100012', '2015/11/26');
+INSERT INTO Vehicules (Id, Marque, Modele, Immatriculation, Kilometrage, statusVehicule) VALUES (1, 'CITROEN', 'C5', 'PL-123-AK', 185000.0, 'DISPONIBLE');
+INSERT INTO Vehicules (Id, Marque, Modele, Immatriculation, Kilometrage, statusVehicule) VALUES (2, 'PEUGEOT', '308', 'AB-615-XZ', 8500.0, 'DISPONIBLE');
+INSERT INTO Vehicules (Id, Marque, Modele, Immatriculation, Kilometrage, statusVehicule) VALUES (3, 'FORD', 'F-Max', 'AA-862-DH', 235100.0, 'DISPONIBLE');
+INSERT INTO Vehicules (Id, Marque, Modele, Immatriculation, Kilometrage, statusVehicule) VALUES (4, 'NISSAN', 'NT500', 'SG-357-KG', 142900.0, 'DISPONIBLE');
+INSERT INTO typevehicules (Id, Nom, Tarif_Jour, Caution) VALUE (1, "sport", 50, 200);
+INSERT INTO typevehicules (Id, Nom, Tarif_Jour, Caution) VALUE (2, "berline", 25, 150);
+INSERT INTO typevehicules (Id, Nom, Tarif_Jour, Caution) VALUE (3, "cabriolet", 20, 100);
+INSERT INTO typevehicules (Id, Nom, Tarif_Jour, Caution) VALUE (4, "déménagement", 10, 90);
+INSERT INTO typevehicules (Id, Nom, Tarif_Jour, Caution) VALUE (5, "frigorifique", 12, 120);
+INSERT INTO voitures (Id, Nombre_de_Place, Id_TypeVehicules) VALUES (1, '5', 1);
+INSERT INTO voitures (Id, Nombre_de_Place ,Id_TypeVehicules) VALUES (2, '2',2);
+INSERT INTO camions (Id, Volume_camion, Id_TypeVehicules) VALUES (3, '150',4);
+INSERT INTO camions (Id, Volume_camion, Id_TypeVehicules) VALUES (4, '250',5);

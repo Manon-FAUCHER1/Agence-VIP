@@ -13,7 +13,7 @@ import composants.validator.FormValidator;
  * @author manon
  *
  */
-public class FormClientValidator extends FormValidator{
+public class FormClientValidator extends FormValidator {
 
 	@Override
 	public boolean validate(Form form) {		

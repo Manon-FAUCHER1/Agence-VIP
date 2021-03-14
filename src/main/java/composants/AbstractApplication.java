@@ -30,7 +30,7 @@ public abstract class AbstractApplication extends JFrame {
 	/** serialVersionUID */
 	private static final long serialVersionUID = -5774337273803383053L;
 	/** width */
-	private int width = 1400;
+	private int width = 1500;
 	/** height */
 	private int height = 718;
 
@@ -159,22 +159,11 @@ public abstract class AbstractApplication extends JFrame {
 		style.addRule(
 				".table td { border: solid 1px black; padding-top:0px; padding-bottom:0px; padding-left:4px;padding-right:4px;}");
 
-		style.addRule(".bg-dark-blue { color: #FFFFFF; background: #0C0F46; font-weight:bold; }");
-		style.addRule(".bg-blue { color: #FFFFFF; background: #007bff; font-weight:bold; }");
-		style.addRule(".bg-red { color: #FFFFFF; background: #dc3545; font-weight:bold;  }");
-		style.addRule(".bg-green { color: #FFFFFF; background: #28a745; font-weight:bold;  }");
-		style.addRule(".bg-grey { color: #FFFFFF; background: #6c757d; font-weight:bold;  }");
-		style.addRule(".bg-orange { color: #FFFFFF; background: #ffc107; font-weight:bold;  }");
-		style.addRule(".bg-turquoise { color: #FFFFFF; background: #17a2b8; font-weight:bold;  }");
-		style.addRule(".bg-yellow { color: #333333; background: #FFFF00; font-weight:bold;  }");
+		style.addRule(".bg-green { color: #FFFFFF; background: #666633; font-weight:bold; }");
+//		style.addRule(".bg-green { color: #FFFFFF; background: #28a745; font-weight:bold; }");
 
-		style.addRule(".btn-blue { color: #FFFFFF; background: #007bff; }");
-		style.addRule(".btn-red { color: #FFFFFF; background: #dc3545; }");
-		style.addRule(".btn-green { color: #FFFFFF; background: #28a745;  text-decoration: none; }");
-		style.addRule(".btn-grey { color: #FFFFFF; background: #6c757d;  text-decoration: none; }");
-		style.addRule(".btn-orange { color: #FFFFFF; background: #ffc107;  text-decoration: none; }");
-		style.addRule(".btn-turquoise { color: #FFFFFF; background: #17a2b8;  text-decoration: none; }");
-		style.addRule(".btn-yellow { color: #000000; background: #FFFF00;  text-decoration: none; }");
+		style.addRule(".btn-ajout { color: #FFFFFF; background: #c2c2a3; padding: 10px 24px; text-align: center; border-radius: 4px; display: inline-block; font-size: 16px; width: 250px }");
+
 
 		// La mise à NULL du Layout permet d'afficher tous les éléments de l'interface
 		// graphique en coordonnées X, Y

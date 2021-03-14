@@ -47,7 +47,7 @@ public class VehiculesDAO {
 	 * @return List<Vehicules>
 	 */
 	public List<Vehicules> selectAll() {
-		TypedQuery<Vehicules> query = em.createQuery("SELECT vehicules FROM Vehicules vehicules", Vehicules.class);
+		TypedQuery<Vehicules> query = em.createQuery("SELECT vehicules FROM Vehicules vehicules ORDER BY vehicules.marque ASC", Vehicules.class);
 		return query.getResultList();
 	}
 

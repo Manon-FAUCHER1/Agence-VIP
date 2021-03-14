@@ -2,10 +2,12 @@ package composants.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 
+import Entities.TypeVehicules;
 import Enumerations.StatusVehicules;
 
 /** Champ de type texte pour saisir une information quelconque
@@ -18,6 +20,8 @@ public class TextField extends Input {
 	private String value;
 	
 	private StatusVehicules valuestatus;
+	
+	private List<Selectable> typeVehicules;
 
 	/** Constructeur
 	 * @param name nom du champ de saisie
@@ -76,6 +80,19 @@ public class TextField extends Input {
 	public TextField(String label, String name, StatusVehicules value, boolean editable) {
 		super(label, name);
 		this.valuestatus = value;
+		setWidth(200);
+		setEditable(editable);
+	}
+	
+	/** Constructeur
+	 * @param name nom du champ de saisie
+	 * @param label libellé du champ de saisie
+	 * @param value valeur du champ de saisie
+	 * @param editable indique si le champ est modifiable ou non
+	 */
+	public TextField(String label, String name, List<Selectable> selectable, boolean editable) {
+		super(label, name);
+		this.typeVehicules = selectable;
 		setWidth(200);
 		setEditable(editable);
 	}
