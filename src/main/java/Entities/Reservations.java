@@ -29,7 +29,7 @@ public class Reservations {
 	private Date dateDebut;
 	
 	@Column(name = "Date_Fin", nullable = false)
-	private Date date_fin;
+	private Date datefin;
 	
 	@Column(name = "Commentaire", nullable = true)
 	private String commentaire;
@@ -65,7 +65,7 @@ public class Reservations {
 		super();
 		this.id = id;
 		this.dateDebut = dateDebut;
-		this.date_fin = date_fin;
+		this.datefin = date_fin;
 		this.commentaire = commentaire;
 		this.vehicule = vehicule;
 		this.client = client;
@@ -109,16 +109,16 @@ public class Reservations {
 	 * Getter
 	 * @return date_fin
 	 */
-	public Date getDate_fin() {
-		return date_fin;
+	public Date getDateFin() {
+		return datefin;
 	}
 
 	/**
 	 * Setter
 	 * @param date_fin
 	 */
-	public void setDate_fin(Date date_fin) {
-		this.date_fin = date_fin;
+	public void setDateFin(Date date_fin) {
+		this.datefin = date_fin;
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class Reservations {
 	 */
 	@Override
 	public String toString() {
-		return "Reservations [id=" + id + ", dateDebut=" + dateDebut + ", date_fin=" + date_fin + ", commentaire="
+		return "Reservations [id=" + id + ", dateDebut=" + dateDebut + ", date_fin=" + datefin + ", commentaire="
 				+ commentaire + "]";
 	}
 	

@@ -29,7 +29,7 @@ public class ReservationsDAO {
 	 * Retourne la liste des Reservations en cours
 	 * @return Liste<Reservation>
 	 */
-	public List<Reservations> slectCurrent() {
+	public List<Reservations> selectCurrent() {
 		TypedQuery<Reservations> query = em.createQuery(
 				"SELECT reservations FROM Reservations reservations WHERE reservations.date_fin IS NULL",
 				Reservations.class);

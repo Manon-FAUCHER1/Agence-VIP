@@ -114,9 +114,9 @@ public class ListeVehicules extends MenuService {
 					Utils.parseDouble(form.getValue("volume")),
 					form.getValue("type"));
 					
-					vehiculesDao.insertCamion(nvCamions);
+			vehiculesDao.insertCamion(nvCamions);
 					
-					traitement();
+			traitement();
 		}
 	}
 	

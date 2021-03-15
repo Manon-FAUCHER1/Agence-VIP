@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import Services.GestionClients.ListeClients;
+import Services.GestionReservations.ListeReservationsEnCours;
 import Services.GestionTypesVehicules.ListeTypesVehicules;
 import Services.GestionVehicules.ListeVehicules;
 import composants.AbstractApplication;
@@ -44,8 +45,11 @@ public class Application extends AbstractApplication {
 		addMenu(3, "Gestion des réservations");
 		
 		addMenuOption(1, "Liste des Vehicules", new ListeVehicules());
+		addMenuOption(1, "Liste des types de vehicule", new ListeTypesVehicules());
 		addMenuOption(2, "Liste des clients", new ListeClients());
-		addMenuOption(2, "Liste des types de vehicule", new ListeTypesVehicules());
+		addMenuOption(3, "Liste des résertions en cours", new ListeReservationsEnCours());
+		addMenuOption(3, "Liste des résertions terminé", new ListeReservationsEnCours());
+		addMenuOption(3, "ouvrire une nouvelle reservation", new ListeReservationsEnCours());
 		
 		
 	}
